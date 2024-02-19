@@ -20,6 +20,7 @@ class App(ctk.CTk):
         self.geometry(f"{self.screen_size[0]}x{self.screen_size[1]}")
         self.barra_superior_color_azul = "#1E90FF"
         self.cuerpo_color_oscuro = "#252525"
+        self.cuerpo_color_dark = "#161616"
         self.boton_color_azul = "#0159AF"
         self.hora = time.strftime("%H:%M")
         self.fecha = formato_fecha()
@@ -54,9 +55,20 @@ class App(ctk.CTk):
         ###
         # Creación del cuerpo
         ###
+        self.cuerpo = ctk.CTkFrame(master=self, fg_color=self.cuerpo_color_oscuro, width=(self.screen_size[0]), height=500)
+        self.cuerpo.pack(padx=2, pady=0, side="top")
+        self.aside = ctk.CTkFrame(master=self.cuerpo, fg_color=self.cuerpo_color_dark, width=((self.screen_size[0])*(1/6)), height=self.screen_size[1]-80)
+        self.aside.pack(padx=0, pady=0, side="left")
+        self.workbench = ctk.CTkFrame(master=self.cuerpo, fg_color=self.cuerpo_color_oscuro, width=((self.screen_size[0])*(5/6)), height=self.screen_size[1]-80)
+        self.workbench.pack(padx=0, pady=0, side="right")
+        self.workbenchtop = ctk.CTkFrame(master=self.workbench, fg_color=self.cuerpo_color_oscuro, width=(self.screen_size[0]), height=(self.screen_size[1]-80)/2)
+        self.workbenchtop.pack(padx=1, pady=0, side="top")
+        self.workbenchbottom = ctk.CTkFrame(master=self.workbench, fg_color=self.cuerpo_color_oscuro, width=(self.screen_size[0]), height=(self.screen_size[1]-80)/2)
+        self.workbenchbottom.pack(padx=1, pady=0, side="bottom")
+        
+        
 
-        self.cuerpo = ctk.CTkFrame(master=self, fg_color=self.cuerpo_color_oscuro, width=self.screen_size[0], height=500)
-        self.cuerpo.pack(padx=0, pady=0, side="top")
+        
 
 
         ###
@@ -67,5 +79,5 @@ class App(ctk.CTk):
         self.barra_inferior.pack(padx=0, pady=0, side="bottom")
 
         self.adios = ctk.CTkButton(master=self.barra_inferior, text="Salir", height=32, width=120, font=("Arial", 20), fg_color="#FF0000", command=self.quit)
-        self.adios.place(relx=0.1, rely=0.5, anchor="center")
+        self.adios.place(relx=0.05, rely=0.5, anchor="center")
 
